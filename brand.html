@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>XXX管理系统</title>
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <!-- 引入头部公共文件 -->
+        <div class="lj-head">
+            <div class="left">
+                <a href="./index.html" class="logo">xx后台管理系统</a>
+            </div>
+            <div class="right">
+                <p id="name">XXXX欢迎您</p>
+                <button class="btn btn-success" id="quit">退出</button>
+            </div>
+        </div>
+        <div class="lj-main">
+            <ul class="lj-menu">
+                <li> <a href="./users.html">用户管理</a></li>
+                <li> <a href="./brand.html">品牌管理</a></li>
+                <li> <a href="./phone.html">手机管理</a></li>
+            </ul>
+            <div class="lj-boyd">
+
+                <!-- 新增品牌 -->
+                <div class="formPhone">
+                    <button class="btn btn-info">新增品牌</button>
+                </div>
+
+                <!-- 修改框 -->
+                <div id='cennter' class="cennter">
+                    <form action="http://localhost:3000/api/brand/change" method="POST" enctype="multipart/form-data">
+                        <h1>修改</h1>
+                        <label>
+                            <span>品牌名称：</span>
+                            <input type="text" id="ibn" name="barndName" placeholder="请输入品牌名称">
+                        </label>
+                        </br>
+                        <label>
+                            <span>图&emsp;&emsp;片：</span>
+                            <input type="file" name="file">
+                            <input height="" type="text" name="_id" id="onbtnInfo">
+                        </label>
+                        <p>
+                            
+                            <input type="submit"  value="保存"  class="btn btn-success">
+                            <!-- <input type="submit" value="取消" id='miss'> -->
+                            <a href="/brand.html" id='miss' class="btn btn-success">取消</a>
+                        </p>
+                    </form>
+                </div>
+
+
+                <!-- 新增产品 -->
+                <div>
+                    <form action="http://localhost:3000/api/brand/upload" method="POST" enctype="multipart/form-data"
+                        class="update">
+                        <h1>新增</h1>
+                        <label>
+                            <span>品牌名称：</span>
+                            <input type="text" name="barndName" placeholder="请输入品牌名称">
+                        </label>
+                        </br>
+                        <label>
+                            <span>图&emsp;&emsp;片：</span>
+                            <input type="file" name="file">
+                        </label>
+                        <p>
+                            <input type="submit" value="保存" id='btnInfo' class="btn btn-success">
+                            <!-- <input type="submit" value="取消" id='miss'> -->
+                            <a href="/brand.html" id='miss' class="btn btn-success">取消</a>
+
+                        </p>
+                    </form>
+                </div>
+                <!-- 表格部分 -->
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>品牌LOGO</th>
+                            <th>品牌名称</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+
+
+
+                        <!-- <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>
+                                <a href="#">删除</a>
+                                <a href="#">修改</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+
+                <!-- 分页 -->
+                <nav>
+                    <ul class="pagination">
+                        <!-- <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li> -->
+                    </ul>
+                </nav>
+
+
+            </div>
+        </div>
+        <div class="lj-footer">底部
+
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/template-web.js"></script>
+<!-- 把数据渲染到页面上通过template（品牌列表） -->
+<script id='tpl-user' type='text/html'>
+    {{each list}}   
+        <!-- <tr _id= {{$value._id}}> -->
+        <td>{{$index+1}}</td>
+        <td><img id='brandImg' src="{{$value.fileName}}" ></td>
+        <td class='bn'>{{$value.brandName}}</td>
+        <td>                 
+            <a href="javascript:;"  class='deleteall' _id= {{$value._id}}>删除</a> 
+            <a href="javascript:;"  class='queryId' _id= {{$value._id}}>修改</a>
+        </td>
+        </tr>
+    {{/each}}
+</script>
+<!-- 把数据渲染到页面上通过template（用户列表分页） -->
+<script id='tpl-page' type='text/html'>
+    <li>
+        <a href="javascript:;" data-page="<%= page  < 1? 1: page-1 %>" class="pagea"    aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li">
+    <% for(var i = 0; i < totalPage; i++){ %>
+        <li class='<%= page ===(i+1)?"active":" " %>' >
+            <a href="javascript:;" data-page="<%= i + 1%>" class="pagea"><%= i+1 %></a>
+        </li>
+    <% } %>
+    <li>
+        <a href="javascript:;" data-page="<%= page  < totalPage ? page +1 :totalPage  %>" class="pagea" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</script>
+<!--把数据渲染到页面上通过template渲染查询到的数据集合（修改品牌信息） -->
+
+<script src="./js/brand.js"></script>
+<script src="/js/quit.js"></script>

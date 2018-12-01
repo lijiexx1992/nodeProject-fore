@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>XXX管理系统</title>
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 引入头部公共文件 -->
+        <div class="lj-head">
+            <div class="left">
+                <a href="./index.html" class="logo">xx后台管理系统</a>
+            </div>
+            <div class="right">
+                <p id='name'>XXXX欢迎您</p>
+                <button id='quit' class="btn btn-success">退出</button>
+            </div>
+        </div>
+        <div class="lj-main">
+            <ul class="lj-menu">
+                <li> <a href="./users.html">用户管理</a></li>
+                <li> <a href="./brand.html">品牌管理</a></li>
+                <li> <a href="./phone.html">手机管理</a></li>
+            </ul>
+            <div class="lj-boyd">
+                <!-- 搜索 -->
+                <div class="seacrh-bar form-inline">
+                    <input  id="seacrhInput" type="text" class="form-control">
+                    <button  id="seacrhBtn" class="btn btn-info">搜索</button>
+                </div>
+
+                <!-- 修改框 -->
+                <div class="cennter">
+                    <!-- <label>
+                        <span>账号：</span>
+                        <input type="text" name="name" placeholder="请输入账号">
+                    </label>
+                    <label>
+                        <span>密码：</span>
+                        <input type="password" name="password" placeholder="请输入密码">
+                    </label>
+                    <label>
+                        <span>昵称：</span>
+                        <input type="text" name="nickname" placeholder="请输入昵称">
+                    </label>
+                    <label>
+                        <span>年龄：</span>
+                        <input type="text" name="age" placeholder="请输入年龄">
+                    </label>
+                    <label>
+                        <span>性别：</span>
+                        <input type="radio" name="sex" value="男">男
+                        <input type="radio" name="sex" value="女">女
+                    </label>
+                    <label>
+                        <span>管理员：</span>
+                        <input type="radio" name="isAdmin" value="是">是
+                        <input type="radio" name="isAdmin" value="否">否
+                    </label>
+                    </br>
+                    <p>
+                        <input type="submit" value="保存" id='btn'>
+                        </br>
+                    </p> -->
+                </div>
+
+
+                <!-- 表格部分 -->
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>用户名</th>
+                            <th>用户昵称</th>
+                            <th>性别</th>
+                            <th>年龄</th>
+                            <th>是否是管理员</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+
+
+                    </tbody>
+                </table>
+
+                <!-- 分页 -->
+                <nav>
+                    <ul class="pagination">
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="lj-footer">底部
+
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/template-web.js"></script>
+<!-- 把数据渲染到页面上通过template（用户列表） -->
+<script id='tpl-user' type='text/html'>
+    {{each list}}
+        <tr>
+        <td>{{$index+1}}</td>
+        <td>{{$value.username}}</td>
+        <td>{{$value.nickname}}</td>
+        <td>{{$value.sex}}</td>
+        <td>{{$value.age}}</td>
+        <td>{{$value.isAdmin}}</td>
+        <td>                   
+         {{if !$value.isAdmin}}
+            <a href="javascript:;"  class='deleteall' _id= {{$value._id}}>删除</a> 
+        {{/if}}
+            <a href="javascript:;"  class='queryId' _id= {{$value._id}}>修改</a>
+        </td>
+        </tr>
+    {{/each}}
+</script>
+<!-- 把数据渲染到页面上通过template（用户列表分页） -->
+<script id='tpl-page' type='text/html'>
+    <li>
+        <a href="javascript:;" data-page="<%= page  < 1? 1: page-1 %>" class="pagea"    aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li">
+    <% for(var i = 0; i < totalPage; i++){ %>
+        <li class='<%= page ===(i+1)?"active":" " %>' >
+            <a href="javascript:;" data-page="<%= i + 1%>" class="pagea"><%= i+1 %></a>
+        </li>
+    <% } %>
+    <li>
+        <a href="javascript:;" data-page="<%= page  < totalPage ? page +1 :totalPage  %>" class="pagea" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</script>
+<!--把数据渲染到页面上通过template渲染查询到的数据集合（修改用户信息） -->
+<script id='tpl-query' type='text/html'>
+        <label>
+            <span>修改密码：</span>
+            <input type="text" name="password" value={{data.password}}>
+        </label>
+        <label>
+            <span>修改昵称：</span>
+            <input type="text" name="nickname" value={{data.nickname}}>
+        </label>
+        <label>
+            <span>修改年龄：</span>
+            <input type="text" name="age" value={{data.age}}>
+        </label>
+        <label>
+            <span>修改性别：</span>
+            <input type="radio" name="sex" value="男">男
+            <input type="radio" name="sex" value="女">女
+        </label>
+        <p>
+            <input type="submit" value="保存"  _id= {{data._id}} id='btn'>
+            <input type="submit" value="取消"  id='miss'>
+            </br>
+        </p>
+ 
+</script>
+<!-- 把查询的结果渲染到页面上 -->
+<script src="/js/users.js"></script>
+<script src="/js/quit.js"></script>

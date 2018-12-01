@@ -1,0 +1,29 @@
+body{
+    height: 100%;
+    //width: 100%;
+    background:url(/images/bgc.jpeg) ;
+    background-size:cover;
+    overflow: hidden;
+}
+
+.box{
+    width: 400px;
+    height: 400px;
+    margin: 200px  auto;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    background-color: aqua;
+    opacity: 0.9;
+    .cennter{
+        flex: 1;
+        margin: 0px 72px;
+        p{
+            margin: 10px 0px;
+        }
+        label{
+            margin: 5px 0px;
+        }
+        
+    }
+}

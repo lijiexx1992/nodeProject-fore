@@ -1,0 +1,20 @@
+$(function(){
+    $("#btn").click(function(){
+        $.post('http://localhost:3000/api/register',{
+            username:$('input[name=name]').val(),
+            password:$('input[name=password]').val(),
+            nickname:$('input[name=nickname]').val(),
+            age:$('input[name=age]').val(),
+            sex:$('input[name="sex"]:checked').val(),
+            isAdmin:$('input[name="isAdmin"]:checked').val()
+        },function(res){
+            if(res.code ===0){
+                //注册成功后跳转到首页
+                location.href='./loging.html';
+            }else{
+                //注册失败
+                alert(res.msg);
+            }
+        })
+    })
+})
