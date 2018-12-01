@@ -27,7 +27,7 @@
         </div>
         <div class="lj-main">
             <ul class="lj-menu">
-                <li> <a href="./users.html">用户管理</a></li>
+                <li id='vip'> <a href="./users.html">用户管理</a></li>
                 <li> <a href="./brand.html">品牌管理</a></li>
                 <li> <a href="./phone.html">手机管理</a></li>
             </ul>
@@ -39,18 +39,18 @@
                 </div>
 
                 <!-- 修改框 -->
-                <div id='cennter' class="cennter">
+                <div id='cennter' class="cennter" style="z-index: 11;">
                     <form action="http://localhost:3000/api/brand/change" method="POST" enctype="multipart/form-data">
                         <h1>修改</h1>
                         <label>
                             <span>品牌名称：</span>
-                            <input type="text" id="ibn" name="barndName" placeholder="请输入品牌名称">
+                            <input type="text" id="ibn" name="brandName" placeholder="请输入品牌名称">
                         </label>
                         </br>
                         <label>
                             <span>图&emsp;&emsp;片：</span>
                             <input type="file" name="file">
-                            <input height="" type="text" name="_id" id="onbtnInfo">
+                            <input hidden type="text" name="_id" id="onbtnInfo">
                         </label>
                         <p>
                             
@@ -160,7 +160,7 @@
     {{each list}}   
         <!-- <tr _id= {{$value._id}}> -->
         <td>{{$index+1}}</td>
-        <td><img id='brandImg' src="{{$value.fileName}}" ></td>
+        <td><img id='brandImg' src="{{$value.filieName}}" ></td>
         <td class='bn'>{{$value.brandName}}</td>
         <td>                 
             <a href="javascript:;"  class='deleteall' _id= {{$value._id}}>删除</a> 
@@ -191,3 +191,4 @@
 
 <script src="./js/brand.js"></script>
 <script src="/js/quit.js"></script>
+<script src="js/index.js"></script>

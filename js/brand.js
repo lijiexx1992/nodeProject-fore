@@ -80,7 +80,6 @@ function getBrand(page,pageSize){
         //  console.log(list);
          var html = template('tpl-user',{
             list:list
-           
          })
          $("#tbody").html(html);
          

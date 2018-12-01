@@ -4,7 +4,12 @@ $(function(){
             $('#name').text("XXXX欢迎您");
         }else{
             // console.log(localStorage.getItem('nickname'))
-            $('#name').text(localStorage.getItem('nickname'));
+            if(!localStorage.getItem('isAdmin')){
+                $('#name').text(localStorage.getItem('nickname')+"(普通会员)");
+            }else{
+                $('#name').text(localStorage.getItem('nickname')+"(管理员)");
+            }
+          
         }
     
         //点击退出退出账号页面跳转到登录页

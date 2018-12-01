@@ -27,7 +27,7 @@
         </div>
         <div class="lj-main">
             <ul class="lj-menu">
-                <li> <a href="./users.html">用户管理</a></li>
+                <li id='vip' > <a href="./users.html">用户管理</a></li>
                 <li> <a href="./brand.html">品牌管理</a></li>
                 <li> <a href="./phone.html">手机管理</a></li>
             </ul>
@@ -39,7 +39,7 @@
                 </div>
 
                 <!-- 修改框 -->
-                <div id='cennter' class="cennter" style="z-index:11" >
+                <div id='cennter' class="cennter" style="z-index: 11;" >
                     <form action="http://localhost:3000/api/phone/change" method="POST" enctype="multipart/form-data">
                         <h1>修改</h1>
                         <label>
@@ -48,7 +48,7 @@
                         </label>
                         <label>
                             <span>品牌名称：</span>
-                            <input type="text" id="p2" name="barndName" placeholder="请输入品牌名称">
+                            <input type="text" id="p2" name="brandName" placeholder="请输入品牌名称">
                         </label>
                         <label>
                             <span>官方价格：</span>
@@ -83,7 +83,7 @@
                         </label>
                         <label>
                             <span>品牌：</span>
-                            <input type="text" name="barndName" placeholder="请输入品牌名称">
+                            <input type="text" name="brandName" placeholder="请输入品牌名称">
                         </label>
                         <label>
                             <span>官方指导价：</span>
@@ -184,7 +184,7 @@
     {{each list}}   
         <!-- <tr _id= {{$value._id}}> -->
         <td>{{$index+1}}</td>
-        <td><img id='brandImg' src="{{$value.fileName}}" ></td>
+        <td><img id='brandImg' src="{{$value.filieName}}" ></td>
         <td class='p1' >{{$value.phoneName}}</td>
         <td class='p2'>{{$value.brandName}}</td>
         <td class='p3' >{{$value.price}}</td>
@@ -218,3 +218,4 @@
 
 <script src="./js/phone.js"></script>
 <script src="/js/quit.js"></script>
+<script src="/js/index.js"></script>
